@@ -3,13 +3,14 @@ package com.POS.SB.backend.repo;
 import com.POS.SB.backend.entity.Item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
 @EnableJpaRepositories
-public interface ItemRepo {
+public interface ItemRepo extends JpaRepository<Item, Integer> {
     List<Item> findAllByItemNameEqualsAndActiveStateEquals(String itemName, boolean activestate);
 
     List<Item> findAllByActiveStateEquals(boolean activeState);
