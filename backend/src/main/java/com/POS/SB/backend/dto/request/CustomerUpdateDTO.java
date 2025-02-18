@@ -47,5 +47,15 @@ public class CustomerUpdateDTO {
     public void setSalary(Double salary) {
         this.salary = salary;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerUpdateDTO{" +
+                "CustomerID=" + CustomerID +
+                ", customerName='" + customerName + '\'' +
+                ", customerAddress='" + customerAddress + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
 }
 
