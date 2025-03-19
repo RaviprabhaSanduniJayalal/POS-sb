@@ -1,5 +1,6 @@
 package com.POS.SB.backend.service.IMPL;
 
+import com.POS.SB.backend.dto.paginated.PaginatedResponseItemDTO;
 import com.POS.SB.backend.dto.request.ItemSaveRequestDTO;
 import com.POS.SB.backend.dto.response.ItemGetResponseDTO;
 import com.POS.SB.backend.entity.Item;
@@ -10,6 +11,8 @@ import com.POS.SB.backend.util.mappers.ItemMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -81,5 +84,20 @@ public class ItemServiceIMPL implements ItemService {
         }else {
             throw new NotFoundException("Item is not active");
         }
+    }
+
+    @Override
+    public PaginatedResponseItemDTO getItemsByActiveStatusWithPaginated(boolean activeState, int page, int size) {
+        Page<Item> items=itemRepo.findAllByActiveStateEquals(activeState, PageRequest.of(page,size));
+        int count=itemRepo.countAllByActiveStateEquals(activeState);
+        if(items.getSize()<1){
+            throw new NotFoundException("No Data Found");
+        }
+        PaginatedResponseItemDTO paginatedResponseItemDTOS = new PaginatedResponseItemDTO(
+                itemMapper.ListDTOToPage(items),
+                count
+        );
+        return paginatedResponseItemDTOS;
+
     }
 }

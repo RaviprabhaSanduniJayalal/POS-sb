@@ -1,5 +1,6 @@
 package com.POS.SB.backend.service;
 
+import com.POS.SB.backend.dto.paginated.PaginatedResponseItemDTO;
 import com.POS.SB.backend.dto.request.ItemSaveRequestDTO;
 import com.POS.SB.backend.dto.response.ItemGetResponseDTO;
 
@@ -11,4 +12,6 @@ public interface ItemService {
     List<ItemGetResponseDTO> getItemNameAndStatusBymapStruct(String itemName);
 
     List<ItemGetResponseDTO> getItemsByActiveStatus(boolean activeState);
+
+    PaginatedResponseItemDTO getItemsByActiveStatusWithPaginated(boolean activeState, int page, int size);
 }
