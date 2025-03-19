@@ -1,4 +1,4 @@
-package com.POS.SB.backend.service.IMPL;
+package com.POS.SB.backend.service;
 
 import com.POS.SB.backend.dto.CustomerDTO;
 import com.POS.SB.backend.dto.request.CustomerUpdateDTO;

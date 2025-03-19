@@ -5,6 +5,7 @@ import com.POS.SB.backend.dto.request.CustomerUpdateDTO;
 import com.POS.SB.backend.entity.Customer;
 import com.POS.SB.backend.exception.NotFoundException;
 import com.POS.SB.backend.repo.CustomerRepo;
+import com.POS.SB.backend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
