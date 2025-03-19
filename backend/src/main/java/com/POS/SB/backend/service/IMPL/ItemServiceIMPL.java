@@ -3,6 +3,7 @@ package com.POS.SB.backend.service.IMPL;
 import com.POS.SB.backend.dto.request.ItemSaveRequestDTO;
 import com.POS.SB.backend.dto.response.ItemGetResponseDTO;
 import com.POS.SB.backend.entity.Item;
+import com.POS.SB.backend.exception.NotFoundException;
 import com.POS.SB.backend.repo.ItemRepo;
 import com.POS.SB.backend.service.ItemService;
 import com.POS.SB.backend.util.mappers.ItemMapper;
@@ -70,4 +71,15 @@ public class ItemServiceIMPL implements ItemService {
     }
 
 
+    @Override
+    public List<ItemGetResponseDTO> getItemsByActiveStatus(boolean activeState) {
+        List<Item> items=itemRepo.findAllByActiveStateEquals(activeState);
+
+        if(items.size()>0) {
+            List<ItemGetResponseDTO> itemGetResponseDTOS =itemMapper.entityListToDtoList(items);
+            return itemGetResponseDTOS;
+        }else {
+            throw new NotFoundException("Item is not active");
+        }
+    }
 }

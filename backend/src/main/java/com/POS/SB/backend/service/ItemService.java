@@ -9,4 +9,6 @@ public interface ItemService {
     String saveItem(ItemSaveRequestDTO itemSaveRequestDTO);
 
     List<ItemGetResponseDTO> getItemNameAndStatusBymapStruct(String itemName);
+
+    List<ItemGetResponseDTO> getItemsByActiveStatus(boolean activeState);
 }
