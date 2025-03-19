@@ -1,6 +1,7 @@
 package com.POS.SB.backend.service.IMPL;
 
 import com.POS.SB.backend.dto.request.ItemSaveRequestDTO;
+import com.POS.SB.backend.dto.response.ItemGetResponseDTO;
 import com.POS.SB.backend.entity.Item;
 import com.POS.SB.backend.repo.ItemRepo;
 import com.POS.SB.backend.service.ItemService;
@@ -9,6 +10,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ItemServiceIMPL implements ItemService {
@@ -52,6 +55,18 @@ public class ItemServiceIMPL implements ItemService {
 
 
 
+    }
+    @Override
+    public List<ItemGetResponseDTO> getItemNameAndStatusBymapStruct(String itemName) {
+        boolean activeState=true;
+        List<Item> items=itemRepo.findAllByItemNameEqualsAndActiveStateEquals(itemName,activeState);
+
+        if(items.size()>0) {
+            List<ItemGetResponseDTO> itemGetResponseDTOS =itemMapper.entityListToDtoList(items);
+            return itemGetResponseDTOS;
+        }else {
+            throw new RuntimeException("Item is not active");
+        }
     }
 
 
