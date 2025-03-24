@@ -13,6 +13,4 @@ public class PaginatedResponseOrderDetails {
     private List<ResponseOrderDetailsDTO> list;
     private long dataCount;
 
-    public PaginatedResponseOrderDetails(List<ResponseOrderDetailsDTO> list, long dataCount) {
-    }
 }

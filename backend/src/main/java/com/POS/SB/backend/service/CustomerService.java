@@ -10,7 +10,7 @@ public interface CustomerService {
 
     String updateCustomer(CustomerUpdateDTO customerUpdateDTO);
 
-    String updateCustomer(CustomerUpdateDTO customerUpdateDTO);
+
 
     CustomerDTO getCustomerByID(int customerId);
 
