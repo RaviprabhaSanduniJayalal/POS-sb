@@ -1,5 +1,6 @@
 package com.POS.SB.backend.repo;
 
+import com.POS.SB.backend.dto.queryInterfaces.OrderDetailsInterface;
 import com.POS.SB.backend.entity.Order;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
