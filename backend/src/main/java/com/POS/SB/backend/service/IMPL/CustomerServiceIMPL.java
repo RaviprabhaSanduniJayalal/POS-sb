@@ -95,4 +95,14 @@ public class CustomerServiceIMPL implements CustomerService {
             throw new NotFoundException("Not found");
     }
 
+    @Override
+    public List<CustomerDTO> getAllCustomersByActiveStatus(boolean activestate) {
+        return List.of();
+    }
+
+    @Override
+    public String deletecustomer(int customerId) {
+        return "";
+    }
+
 }
