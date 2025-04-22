@@ -109,4 +109,9 @@ public class ItemServiceIMPL implements ItemService {
         );
     }
 
+    @Override
+    public List<ItemGetResponseDTO> getItemNameAndStatus(String itemName) {
+        return List.of();
+    }
+
 }
