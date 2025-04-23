@@ -1,9 +1,11 @@
 package com.POS.SB.backend.controller;
 
+import com.POS.SB.backend.dto.paginated.PaginatedResponseItemDTO;
 import com.POS.SB.backend.dto.request.ItemSaveRequestDTO;
 import com.POS.SB.backend.dto.response.ItemGetResponseDTO;
 import com.POS.SB.backend.service.ItemService;
 import com.POS.SB.backend.util.StandardResponse;
+import jakarta.validation.constraints.Max;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,5 +46,36 @@ public class ItemController {
         List<ItemGetResponseDTO> itemDTOS = itemservice.getItemNameAndStatusBymapStruct(itemName);
         return itemDTOS;
 
+    }
+    @GetMapping(
+            path="/get-all-item-by-status",
+            params = {"activeState","page","size"}
+    )
+    public ResponseEntity<StandardResponse> getItemsByActiveStatus(
+            @RequestParam(value = "activeState")boolean activeState,
+            @RequestParam(value = "page")int page,
+            @RequestParam(value = "size") @Max(50) int size
+    ){
+        PaginatedResponseItemDTO paginatedResponseItemDTO=itemservice.getItemsByActiveStatusWithPaginated(activeState,page,size);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200,"Success",paginatedResponseItemDTO),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping(
+            path="get-all-active-items-paginated",
+            params={"page","size","activeState"}
+    )
+    public ResponseEntity<StandardResponse> getAllActiveItemsPaginated(
+            @RequestParam(value = "page")int page,
+            @RequestParam(value = "size")@Max(50)int size,
+            @RequestParam(value="activeState") boolean activeState
+    ){
+        PaginatedResponseItemDTO paginatedResponseItemDTO=itemservice.getAllActiveItemsPaginated(page,size,activeState);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200,"Success",paginatedResponseItemDTO)
+                ,HttpStatus.OK
+        );
     }
 }
